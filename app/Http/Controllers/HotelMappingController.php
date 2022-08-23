@@ -35,7 +35,7 @@ class HotelMappingController extends Controller
     public function create()
     {
         $hotelMapping_ids = HotelMapping::select('hotel_id')->get()->pluck('hotel_id')->toArray();
-        $hotels = Hotel::whereNotIn('hotel_id',$hotelMapping_ids)->get();
+        $hotels = Hotel::whereNotIn('hotel_id',$hotelMapping_ids)->OrderBy('name')->get();
 
         return Inertia::render('HotelMapping/create', [
             'hotels' =>  $hotels,
